@@ -1,0 +1,17 @@
+<div>
+<h1>My Task Manager</h1>
+<input type="text" [(ngModel)]="currentTask.name" placeholder="Task Name">
+<input type="text" [(ngModel)]="currentTask.description" placeholder="Task Description">
+<input type="date" [(ngModel)]="currentTask.dueDate">
+<button (click)="addOrUpdateTask()">{{ editingIndex !== null ? 'Update Task' : 'Add Task' }}</button>
+<ul>
+  <li *ngFor="let task of tasks; let i = index">
+    <input type="checkbox" (change)="toggleComplete(task)">
+    <span [class.completed]="task.completed">{{ task.name }}</span>
+    <span *ngIf="task.description">- {{ task.description }}</span>
+    <span *ngIf="task.dueDate"> (Due Date: {{ task.dueDate | date:'shortDate' }})</span>
+    <button (click)="editTask(task)">Edit</button>
+    <button (click)="deleteTask(task)">Delete</button>
+  </li>
+</ul>
+</div>
